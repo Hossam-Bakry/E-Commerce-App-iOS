@@ -10,8 +10,9 @@ import SwiftUI
 @main
 struct e_commerce_appApp: App {
     var body: some Scene {
+        // Material App
         WindowGroup {
-            ContentView()
+            SplashView()
         }
     }
 }
