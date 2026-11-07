@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SplashView: View {
     
+    @Environment(AppRouter.self) private var router
+    
     var body: some View {
         
         Image(.splashBackground)
@@ -17,6 +19,14 @@ struct SplashView: View {
                     .resizable()
                     .padding(.horizontal, 40)
                     .scaledToFit()
+            }.task {
+                try? await Task.sleep(for: .seconds(2))
+                
+                /// token --> main layout
+                /// no token auth
+                
+                // check save for token
+                
             }
         
 //        ZStack {
