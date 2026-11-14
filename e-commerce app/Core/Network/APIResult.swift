@@ -7,9 +7,10 @@
 
 import Foundation
 
+// Handling Error ["Invalide Pass"]
 enum ApiResult<T> {
     case success(T)
-    case failure(Error)
+    case failure(ServerFailure)
 }
 
 

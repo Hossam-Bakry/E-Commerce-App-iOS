@@ -22,12 +22,14 @@ struct e_commerce_appApp: App {
     
     
     private let router: AppRouter
+    private let feedback: FeedbackCenter
     
     init() {
         AppDI.setup()
         /// TODO: create AppRouter object
         /// ServiceLocator [getIt]
         router = ServiceLocator.shared.resolve(AppRouter.self)
+        feedback = ServiceLocator.shared.resolve(FeedbackCenter.self)
     }
     
     
@@ -37,6 +39,7 @@ struct e_commerce_appApp: App {
         WindowGroup {
             RootView()
                 .environment(router)
+                .environment(feedback)
         }
     }
 }
@@ -87,9 +90,8 @@ struct RootView: View {
                 }
                 
             }
-            
-            
         }
+        .feedbackOverlay()
         
         
     }

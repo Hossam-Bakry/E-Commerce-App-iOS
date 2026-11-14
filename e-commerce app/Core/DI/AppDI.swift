@@ -15,10 +15,35 @@ enum AppDI {
         /// create for all objects [service] we need to run our app
         /// AppRouter, APIClient,
         ///
+        ///
+        
+        // 1- Auth Store
+        locator.registerLazySingleton(AuthTokenStore.self) {
+            UserDefaultsAuthTokenStore()
+        }
+        
+        // 2- Shared API Client
+        locator.registerLazySingleton(APIClient.self) {
+            APIClient(tokenStore: locator.resolve(AuthTokenStore.self))
+        }
         
         
-        // App-Wide Services
+        // 3- App-Wide Services
         locator.registerLazySingleton(AppRouter.self) {AppRouter()}
+        locator.registerLazySingleton(FeedbackCenter.self){FeedbackCenter()}
+        
+        
+        // 401 -> go back to sign-in
+        let router = locator.resolve(AppRouter.self)
+        locator.resolve(APIClient.self).onUnauthorized = { [weak router] in
+            router?.resetToSignIn()
+            
+        }
+        
+        
+        // 4- Features
+        AuthDI.setup(locator)
+        
         
         
     }

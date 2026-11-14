@@ -20,23 +20,18 @@ struct SplashView: View {
                     .padding(.horizontal, 40)
                     .scaledToFit()
             }.task {
-                try? await Task.sleep(for: .seconds(2))
                 
-                /// token --> main layout
-                /// no token auth
+                let tokenStore = ServiceLocator.shared.resolve(AuthTokenStore.self)
                 
-                // check save for token
-                
+                if tokenStore.isAuthenticated() {
+                        var token = tokenStore.getToken()
+                    print(token)
+                    router.resetToMain()
+                } else {
+                    router.resetToSignIn()
+                }
+            
             }
-        
-//        ZStack {
-//            Image(.splashBackground)
-//                .frame(width: .infinity, height: .infinity)
-//            Image(.logo)
-//                .resizable()
-//                .padding(.horizontal, 40)
-//                .scaledToFit()
-//        }
        
     }
 }

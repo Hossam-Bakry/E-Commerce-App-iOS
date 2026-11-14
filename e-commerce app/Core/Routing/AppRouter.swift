@@ -22,9 +22,9 @@ import SwiftUI
 enum Route: Hashable {
     // identyfier for each screen
     case signUp
-    case cart
-    case products
-    case ProductDetails
+//    case cart
+//    case products
+//    case ProductDetails
     
 }
 
@@ -77,13 +77,13 @@ struct RouteDestination: View {
         switch route {
         case .signUp:
             SignUpScreen()
-        case .cart:
+//        case .cart:
 //            CartScreen()
             
-        case .products:
+//        case .products:
 //            ProductsScreen()
             
-        case .ProductDetails:
+//        case .ProductDetails:
 //            ProductDetailsScreen()
         
         }

@@ -18,6 +18,9 @@ struct SignInScreen: View {
     @State private var emailError: String?
     @State private var passwordError: String?
     
+    @State private var viewModel = ServiceLocator.shared.resolve(AuthViewModel.self)
+    
+    
     var body: some View {
        
         
@@ -105,15 +108,16 @@ struct SignInScreen: View {
         
         guard emailError == nil, passwordError == nil else {return}
         
-        print("Data complete to send")
+        viewModel.send(.signIn(email: email, password: password))
         
-        //calling api
     }
 }
 
 #Preview {
-    return NavigationStack {
-        SignInScreen()
-    }
+//    return Navigation
+//    
+//    Stack {
+//        SignInScreen()
+//    }
     
 }

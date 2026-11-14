@@ -27,6 +27,8 @@ struct SignUpScreen: View {
     @State private var phoneError: String?
     @State private var passwordError: String?
     
+    @State private var viewModel = ServiceLocator.shared.resolve(AuthViewModel.self)
+    
     var body: some View {
        
         ScrollView {
@@ -81,9 +83,7 @@ struct SignUpScreen: View {
         
         guard [nameError, phoneError, emailError, passwordError].allSatisfy({$0 == nil}) else { return }
         
-        print("Data is ready to send")
-        
-        // prepare the data object [name, email, phone, password]
+        viewModel.send(.signUp(SignUpRequest(name: name, email: email, password: password, phone: phone)))
     }
     
 }
